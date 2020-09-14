@@ -1,5 +1,6 @@
+// import { removeItems } from './cart.actions';
 import {CartActionTypes} from './cart.types';
-import {addItemsToCart} from './cart.util'
+import {addItemsToCart,removeItemsfromCart} from './cart.util'
 
 const INITIAL_STATE = {
 
@@ -21,6 +22,17 @@ switch(action.type){
                 ...state,
                 cartItems:addItemsToCart(state.cartItems,action.payload)
             }
+            case CartActionTypes.CLEAR_ITEMS_FROM_CART:
+                return{
+                    ...state,
+                    cartItems:state.cartItems.filter(cartItem => cartItem.id !==action.payload.id)
+                }
+                case CartActionTypes.REMOVE_ITEM:
+                    return{
+
+                        ...state,
+                        cartItems:removeItemsfromCart(state.cartItems,action.payload)
+                    }
 
     default :
     return state
